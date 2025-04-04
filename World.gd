@@ -5,8 +5,8 @@ extends Node2D
 @onready var ground = $Ground
 @onready var menu_layer = $MenuLayer
 
-const SAVE_FILE_PATH = "user://score_data.tres"
-var score_data: ScoreData
+#const SAVE_FILE_PATH = "user://score_data.tres"
+#var score_data: ScoreData
 
 var score = 0: set = set_score
 var highscore = 0
@@ -45,22 +45,15 @@ func game_over():
 	
 	if score > highscore:
 		highscore = score
-		save_highscore()
+		SignalBus.high_score_beat.emit(score)
+		ScoreData.save_score(score)
 	
 	menu_layer.init_game_over_menu(score, highscore)
 
 func _on_MenuLayer_start_game():
 	new_game()
 
-func save_highscore():
-	if score_data:
-		score_data.highscore = highscore
-		ResourceSaver.save(score_data, SAVE_FILE_PATH)
-
 func load_highscore():
-	if ResourceLoader.exists(SAVE_FILE_PATH):
-		score_data = ResourceLoader.load(SAVE_FILE_PATH) as ScoreData
-	else:
-		score_data = ScoreData.new()
-	
-	highscore = score_data.highscore
+	var loaded_score = ScoreData.load_score()
+
+	highscore = loaded_score.highscore
