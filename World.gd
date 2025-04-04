@@ -45,9 +45,7 @@ func game_over():
 	
 	if score > highscore:
 		highscore = score
-		SignalBus.high_score_beat.emit(score)
 		ScoreData.save_score(score)
-	
 	menu_layer.init_game_over_menu(score, highscore)
 
 func _on_MenuLayer_start_game():

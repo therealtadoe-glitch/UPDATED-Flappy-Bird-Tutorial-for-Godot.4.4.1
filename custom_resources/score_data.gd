@@ -10,13 +10,11 @@ static func save_score(score: int):
 	var save_data = ScoreData.new()
 	save_data.highscore = score
 	ResourceSaver.save(save_data, SAVE_FILE_PATH)
-	SignalBus.score_saved.emit(score)
 
 static func load_score() -> Resource:
 	var resource = ResourceLoader.load(SAVE_FILE_PATH)
 	
 	if resource:
-		SignalBus.score_loaded.emit()
 		return resource  # Return the loaded custom resource
 	else:
 		print("No save file found.\

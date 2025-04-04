@@ -15,6 +15,9 @@ var started = false
 var alive = true
 
 func _physics_process(_delta):
+	if get_viewport().gui_get_focus_owner() != null or Global.shop_open:
+		return
+	
 	if Input.is_action_just_pressed("flap") and alive:
 		if not started:
 			start()
