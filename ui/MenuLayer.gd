@@ -2,10 +2,10 @@ extends CanvasLayer
 
 signal start_game
 
-@onready var start_message = $StartMenu/StartMessage
-@onready var score_label = $GameOverMenu/VBoxContainer/ScoreLabel
-@onready var high_score_label = $GameOverMenu/VBoxContainer/HighScoreLabel
-@onready var game_over_menu = $GameOverMenu
+@onready var start_message: TextureRect = $StartMenu/StartMessage
+@onready var score_label: Label = $GameOverMenu/VBoxContainer/ScoreLabel
+@onready var high_score_label: Label = $GameOverMenu/VBoxContainer/HighScoreLabel
+@onready var game_over_menu: Control = $GameOverMenu
 
 var game_started = false
 
